@@ -10,7 +10,7 @@ const gameState = {
     playerTurn: 0,
     playerOneScore: 0,
     playerTwoScore: 0,
-
+    currentlyFlipped: false
 }
 
 let firstCard, secondCard, firstCardSymbol, secondCardSymbol;
@@ -35,10 +35,18 @@ symbols = randomizeSymbolArray(symbols);
 function createCards() {
     for (let i = 0; i < symbols.length; i++) {
         card = document.createElement("div");
-        card.innerText = symbols[i];
+        
+        front = document.createElement("div");
+        back =  document.createElement("div");
+        front.classList.add("front");
+        back.classList.add("back");
+        
+
+        back.innerText = symbols[i];
         card.classList.add('card');
     
         cardContainer.append(card);
+        card.append(front, back);
 
         card.addEventListener("click", e => {
             flipCard(e, symbols[i]);
@@ -73,8 +81,13 @@ function checkIfCardsMatch(firstCard, secondCard) {
 
         addPoint()
         updateGraphics();
-        firstCard.remove();
-        secondCard.remove();
+        firstCard.classList.add("correct");
+        secondCard.classList.add("correct");
+        setTimeout(() => {
+            firstCard.classList.add("hide");
+        secondCard.classList.add("hide");
+        }, 1000);
+        
     } else {
         console.log("Korten matchade inte");
         gameState.playerTurn = 1 - gameState.playerTurn;
@@ -87,36 +100,43 @@ function flipBackCards() {
     // Vänd tillbaka alla kort med klassen flip
     let allFlippedCards = document.querySelectorAll('.flip');
     allFlippedCards.forEach(card => card.classList.toggle("flip"));
+    gameState.currentlyFlipped = false;
     
 }
 
 function flipCard(card, symbol){
 
-    card = card.target;
-    card.classList.toggle('flip');
     
+    //If-sats som förhindrar spelaren att öppna fler än 2 kort samtidigt
+    if (!gameState.currentlyFlipped && !card.currentTarget.classList.contains("hide")){
+        card = card.currentTarget;
+        card.classList.toggle('flip');
+        
 
-    if (gameState.cardsFlipped == 0) {
-        //Körs när första kortet väljs.
+        if (gameState.cardsFlipped == 0) {
+            //Körs när första kortet väljs.
+            
+            firstCard = card;
+            firstCardSymbol = symbol;
+            console.log("First card: " + firstCardSymbol);
+            console.log(firstCard);
+            gameState.cardsFlipped += 1;
         
-        firstCard = card;
-        firstCardSymbol = symbol;
-        console.log("First card: " + firstCardSymbol);
-        console.log(firstCard);
-        gameState.cardsFlipped += 1;
-    
-    } else {
-        
-        secondCard = card;
-        secondCardSymbol = symbol;
-        console.log("Second card: " + secondCardSymbol);
-        console.log(secondCard);
-        gameState.cardsFlipped = 0;
-        
-        checkIfCardsMatch(firstCard, secondCard)
-        
-        //Flippa tillbaka alla kort 
-        setTimeout(flipBackCards, 2000);
+        } else {
+            
+            secondCard = card;
+            secondCardSymbol = symbol;
+            console.log("Second card: " + secondCardSymbol);
+            console.log(secondCard);
+            gameState.cardsFlipped = 0;
+            
+            checkIfCardsMatch(firstCard, secondCard)
+            
+            //Flippa tillbaka alla kort 
+            gameState.currentlyFlipped = true;
+            setTimeout(flipBackCards, 1000);
+            
+        }
     }
 }
 

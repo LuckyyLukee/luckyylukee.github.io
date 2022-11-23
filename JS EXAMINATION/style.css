@@ -7,6 +7,8 @@ body {
     justify-content: space-between;
 
     height: 100vh;
+
+    perspective: 1000px;
 }
 
 .left-side {
@@ -56,9 +58,29 @@ header {
     background-color: white;
 
     font-size: 5em;
+
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform .5s;
+}
+
+.correct {
+    color: white;
+    background-color: green;
+}
+
+.hide {
+    background-color: lightgray;
+}
+
+.front, .back {
+    backface-visibility: hidden
+}
+
+.back {
+    transform: rotateY(180deg);
 }
 
 .flip {
-    background-color: black;
-    color: white;
+    transform: rotateY(180deg);
 }
