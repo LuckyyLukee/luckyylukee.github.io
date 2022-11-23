@@ -1,0 +1,64 @@
+body {
+    height: 100vh;
+}
+
+.page-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    height: 100vh;
+}
+
+.left-side {
+    height: 95vh;
+    width: 65%;
+}
+
+header {
+    text-align: center;
+    line-height: 5vh;
+    height: 5vh;
+
+    font-size: 3rem;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8vh;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    background-color: lightgray;
+}
+
+.points-container {
+    height: 100%;
+    width: 30%;
+
+    background-color: lightgray;
+    
+
+    font-size: 3rem;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 20vh;
+    width: 20vh;
+
+    color: black;
+    background-color: white;
+
+    font-size: 5em;
+}
+
+.flip {
+    background-color: black;
+    color: white;
+}
