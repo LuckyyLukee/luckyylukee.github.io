@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.page-header {
+    width: 100%;
+    background-color: lightgray;
+    text-align: center;
+    padding: .5em;
+}
+
+.menu {
+    margin: 0 auto;
+    background-color: lightgray;
+    width: 40vw;
+    height: 40vh;
+    margin-top: 2em;
+    text-align: center;
+}
+
+.menu-header {
+    padding: .8em;
+}
+
+.menu hr {
+    width: 70%;
+    background-color: black;
+    margin: 0 auto;
+}
+
+.playerBtn,
+.computerBtn {
+    width: 80%;
+    height: 20%;
+    margin: 1em;
+    border-style: none;
+    background-color: rgb(86, 86, 86);
+    color: white;  
+    border-radius: 8px;
+}
+
+.playerBtn:hover,
+.computerBtn:hover {
+    background-color: rgb(124, 124, 124);
+}
+
+.playerBtn:active,
+.computerBtn:active {
+    background-color: rgb(86, 86, 86);
+}
+
+.playerNameOne,
+.playerNameTwo {
+    width: 80%;
+    height: 10%;
+    display: block;
+    margin: 0 auto;
+    border-style: none;
+}
+
+.playerName {
+    margin-top: 1em;
+    margin-bottom: .5em;
+}
+
+.startGame {
+    width: 80%;
+    height: 14%;
+    margin-top: 1em;
+    border-style: none;
+    border-radius: 8px;
+    background-color: rgb(86, 86, 86);
+    color: white;
+}
