@@ -1,3 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.game{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, rgb(58, 26, 88), rgb(89, 32, 142));
+}
+
+ 
+.start-menu h1, .start-menu h2, .start-menu p,
+.player-menu h1, .player-menu h2, .player-menu p {
+    color: white;
+}
+ 
+.start-menu{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 90%;
+}
+.start-msg{
+    text-align: center;
+    font-size: 3em;
+    font-weight: 800;
+    width: 90%;
+}
+
+
+.start-menu button, .player-menu button{
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.2em;
+    padding: 1em 0;
+    background: linear-gradient(to bottom, rgb(23, 175, 91), rgb(2, 125, 57));
+    color: white;
+}
+.start-menu button:hover, .player-menu button:hover{
+    background: linear-gradient(to top, rgb(23, 175, 91), rgb(2, 125, 57));
+    cursor: pointer;
+}
+
+.start-btn{
+    margin-top: 10em;
+    width: 90%;
+    margin-bottom: calc(50vh - 2.4em - 10%);
+}
+.back-btn{
+    background: linear-gradient(to bottom, rgb(175, 23, 23), rgb(125, 2, 2));
+}
+.back-btn:hover{
+    background: linear-gradient(to top, rgb(175, 23, 23), rgb(125, 2, 2));
+}
+.player-menu{
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 90%;
+    width: 90%;
+}
+.player-prompt{
+    margin-bottom: 2em;
+    font-size: 3em;
+    font-weight: 700;
+    text-align: center;
+}
+.player-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10em;
+}
+.player-form label{
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: .5em;
+    color: white;
+}
+.player-form input{
+    padding: .7em;
+    opacity: .6;
+    margin-bottom: 1.5em;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+.player-form button{
+    margin-bottom: 1em;
+}
+
+.game-display{
+    visibility: hidden;
+    position: absolute;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Speldelen nedan*/
+
 body {
     height: 100vh;
 }
@@ -9,6 +134,8 @@ body {
     height: 100vh;
 
     perspective: 1000px;
+
+    color: white;
 }
 
 .left-side {
@@ -23,19 +150,19 @@ header {
 
     font-size: 3rem;
 
-    background-color: lightgray;
+    /*background-color: lightgray;*/
 }
 
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 8vh;
+    gap: 3vh;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
 
-    background-color: lightgray;
+    /* background-color: lightgray; */
 }
 
 .winner-text {
@@ -52,7 +179,7 @@ header {
     width: 30%;
 
 
-    background-color: lightgray;
+    /* background-color: lightgray; */
     
 }
 
@@ -73,7 +200,7 @@ header {
     border-radius: 8px;
 
     color: white;
-    background-color: #535353;
+    background-color: rgb(23, 175, 91);
 }
 
 .points-container h1 {
@@ -88,15 +215,12 @@ header {
 }
 
 .card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    height: 20vh;
-    width: 20vh;
+    height: 12vh;
+    width: 12vh;
 
-    color: black;
-    background-color: white;
+    color: whiteblack;
+    background-color: #7209b7;
 
     font-size: 5em;
 
@@ -111,16 +235,22 @@ header {
 }
 
 .hide {
-    background-color: lightgray;
+    visibility: hidden;
     cursor: default;
 }
 
 .front, .back {
-    backface-visibility: hidden
+    backface-visibility: hidden;
 }
 
 .back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transform: rotateY(180deg);
+
+    height: 100%;
+    width: 100%;
 }
 
 .flip {

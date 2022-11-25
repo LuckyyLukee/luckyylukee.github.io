@@ -1,10 +1,16 @@
-const cardContainer = document.querySelector(".card-container");
-const playerTurnText = document.querySelector(".player-turn-text");
-const playerOneScoreText = document.querySelector(".player-one-score");
-const playerTwoScoreText = document.querySelector(".player-two-score");
-const winnerText = document.querySelector(".winner-text")
-const resultLabel = document.querySelector(".result-label");
+//Start meny element
+const startBtn = document.querySelector(".start-btn");
+const backBtn = document.querySelector(".back-btn");
+const startGameBtn = document.querySelector(".start-game-btn");
+const startMenu = document.querySelector(".start-menu");
+const playerMenu = document.querySelector(".player-menu");
+const gameDisplay = document.querySelector(".game-display");
+const firstPlayerName = document.querySelector(".first-player-name");
+const secondPlayerName = document.querySelector(".second-player-name");
+const player1 = document.querySelector(".player1");
+const player2 = document.querySelector(".player2");
 
+//Declare variables
 
 const gameState = {
     gameStarted: false,
@@ -20,10 +26,68 @@ const gameState = {
     playerTwoName: "Spelare 2"
 }
 
+//Start button
+const startClick = () => {
+  startMenu.style.visibility = "hidden";
+  playerMenu.style.visibility = "visible";
+};
+
+startBtn.addEventListener("click", startClick);
+
+//Back button
+const backClick = () => {
+  startMenu.style.visibility = "visible";
+  gameDisplay.style.visibility = "hidden";
+  playerMenu.style.visibility = "hidden";
+};
+
+backBtn.addEventListener("click", backClick);
+
+//Start Game button
+const startGameClick = () => {
+  playerMenu.style.visibility = "hidden";
+  gameDisplay.style.visibility = "visible";
+
+  gameState.playerOneName = player1.value;
+  gameState.playerTwoName = player2.value;
+
+  console.log(gameState.playerOneName);
+
+// HÄR STARTAR SPEL LOGIKEN
+  createCards();
+};
+
+startGameBtn.addEventListener("click", startGameClick);
+
+
+
+
+
+
+
+/*
+
+Hela spellogiken här nere 
+
+*/
+
+
+
+
+
+const cardContainer = document.querySelector(".card-container");
+const playerTurnText = document.querySelector(".player-turn-text");
+const playerOneScoreText = document.querySelector(".player-one-score");
+const playerTwoScoreText = document.querySelector(".player-two-score");
+const playerOneNameLabel = document.querySelector(".player-one-name-label");
+const playerTwoNameLabel = document.querySelector(".player-two-name-label");
+const winnerText = document.querySelector(".winner-text")
+const resultLabel = document.querySelector(".result-label");
+
 let firstCard, secondCard, firstCardSymbol, secondCardSymbol;
 
 //Använda emojis istället för bokstäver??
-let symbols = ["A", "B", "C", "D", "E", "F"];
+let symbols = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
 // Duplicera hela arrayen så man får 2 av varje
 symbols.forEach(e => symbols.push(e));
 
@@ -41,6 +105,7 @@ function randomizeSymbolArray(array) {
 
 
 function createCards() {
+
 
     //Börja med att ta bort befintliga kort och resetta alla poäng
     deleteAllCards();
@@ -91,6 +156,8 @@ function updateGraphics() {
     } else {
         playerTurnText.innerText = gameState.playerTwoName + "'s tur";
     }
+    playerOneNameLabel.innerText = gameState.playerOneName + ": ";
+    playerTwoNameLabel.innerText = gameState.playerTwoName + ": ";
     playerOneScoreText.innerText = gameState.playerOneScore;
     playerTwoScoreText.innerText = gameState.playerTwoScore;
 }
@@ -209,4 +276,4 @@ function flipCard(card, symbol){
     }
 }
 
-createCards();
+
