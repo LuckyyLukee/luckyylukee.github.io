@@ -22,6 +22,8 @@ header {
     height: 5vh;
 
     font-size: 3rem;
+
+    background-color: lightgray;
 }
 
 .card-container {
@@ -36,13 +38,52 @@ header {
     background-color: lightgray;
 }
 
+.winner-text {
+    font-size: 6rem;
+    display: none;
+}
+
 .points-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     height: 100%;
     width: 30%;
 
+
     background-color: lightgray;
     
+}
 
+.btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    width: 90%;
+
+    margin: 0 0 5% 5%;
+
+}
+
+.btn-container button {
+    height: 4em;
+
+    border: none;
+    border-radius: 8px;
+
+    color: white;
+    background-color: #535353;
+}
+
+.points-container h1 {
+    margin: 1rem 0 0 2rem;
+
+    font-size: 4rem;
+}
+
+.points-container h3 {
+    margin: 1rem 0 0 3rem;
     font-size: 3rem;
 }
 
@@ -71,6 +112,7 @@ header {
 
 .hide {
     background-color: lightgray;
+    cursor: default;
 }
 
 .front, .back {

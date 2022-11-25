@@ -2,24 +2,32 @@ const cardContainer = document.querySelector(".card-container");
 const playerTurnText = document.querySelector(".player-turn-text");
 const playerOneScoreText = document.querySelector(".player-one-score");
 const playerTwoScoreText = document.querySelector(".player-two-score");
+const winnerText = document.querySelector(".winner-text")
+const resultLabel = document.querySelector(".result-label");
 
 
 const gameState = {
     gameStarted: false,
-    cardsFlipped: 0,
-    playerTurn: 0,
+    cardsFlipped: 0, 
+    playerTurn: 0, // 0 = spelar 1s tur, 1 = spelar 2s tur
     playerOneScore: 0,
     playerTwoScore: 0,
-    currentlyFlipped: false
+    currentlyFlipped: false,
+
+    //player one name?
+    //player two name?
+    playerOneName: "Spelare 1",
+    playerTwoName: "Spelare 2"
 }
 
 let firstCard, secondCard, firstCardSymbol, secondCardSymbol;
-let symbols = ["A", "B", "C", "D", "E", "F"];
 
+//Använda emojis istället för bokstäver??
+let symbols = ["A", "B", "C", "D", "E", "F"];
+// Duplicera hela arrayen så man får 2 av varje
+symbols.forEach(e => symbols.push(e));
 
 function randomizeSymbolArray(array) {
-    // Duplicera hela arrayen så man får 2 av varje
-    symbols.forEach(e => symbols.push(e));
     // Tar varje item i arrayen och stoppar in det på en random plats.
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
@@ -30,9 +38,21 @@ function randomizeSymbolArray(array) {
     return array;
 }
 
-symbols = randomizeSymbolArray(symbols);
+
 
 function createCards() {
+
+    //Börja med att ta bort befintliga kort och resetta alla poäng
+    deleteAllCards();
+    symbols = randomizeSymbolArray(symbols);
+    gameState.playerOneScore = 0;
+    gameState.playerTwoScore = 0;
+    gameState.cardsFlipped = 0;
+
+    winnerText.style.display = "none";
+    playerTurnText.style.display = "block";
+    updateGraphics();
+
     for (let i = 0; i < symbols.length; i++) {
         card = document.createElement("div");
         
@@ -65,10 +85,11 @@ function addPoint() {
 }
 
 function updateGraphics() {
+    // Uppdaterar speltur och poäng
     if (gameState.playerTurn == 0) {
-        playerTurnText.innerText = "Spelare 1 TUR";
+        playerTurnText.innerText = gameState.playerOneName + "'s tur";
     } else {
-        playerTurnText.innerText = "Spelare 2 TUR";
+        playerTurnText.innerText = gameState.playerTwoName + "'s tur";
     }
     playerOneScoreText.innerText = gameState.playerOneScore;
     playerTwoScoreText.innerText = gameState.playerTwoScore;
@@ -85,15 +106,63 @@ function checkIfCardsMatch(firstCard, secondCard) {
         secondCard.classList.add("correct");
         setTimeout(() => {
             firstCard.classList.add("hide");
-        secondCard.classList.add("hide");
+            secondCard.classList.add("hide");
+            checkIfGameEnded();
         }, 1000);
         
+        
+
+
     } else {
         console.log("Korten matchade inte");
-        gameState.playerTurn = 1 - gameState.playerTurn;
+        gameState.playerTurn = 1 - gameState.playerTurn; // Ändrar till andra spelarens tur
         updateGraphics();
     }
     
+}
+
+function checkCardsLeft() {
+    let cardsLeft = 0; 
+    let allCards = document.querySelectorAll(".card");
+    for (let i = 0; i < allCards.length; i++) {
+        if (!allCards[i].classList.contains("hide")){
+            cardsLeft += 1;
+        }
+    }
+    return cardsLeft;
+}
+
+function checkIfGameEnded() {
+    const playerNameLabel = document.querySelector(".player-name-label");
+    if (checkCardsLeft() == 0) {
+        // Detta körs när det inte finns några kort kvar
+        if (gameState.playerOneScore > gameState.playerTwoScore){
+            //Spelare ett vann
+            playerNameLabel.innerText = gameState.playerOneName;
+            resultLabel.innerText = " vann!"
+        } else if (gameState.playerTwoScore > gameState.playerOneScore) {
+            //Spelare två vann
+            playerNameLabel.innerText = gameState.playerTwoName;
+            resultLabel.innerText = " vann!"
+        } else {
+            // Båda fick lika mycket poäng
+            playerNameLabel.innerText = ""
+            resultLabel.innerHTML = "Oavgjort!";
+            console.log("Tie!");
+        }
+        deleteAllCards();
+        winnerText.style.display = "block";
+        playerTurnText.innerText = "";
+    } else {
+        console.log("no winner");
+    }
+}
+
+function deleteAllCards() {
+    let allCards = document.querySelectorAll(".card");
+    for (let i = 0; i < allCards.length; i++) {
+        allCards[i].remove();
+    }
 }
 
 function flipBackCards() {
@@ -107,10 +176,10 @@ function flipBackCards() {
 function flipCard(card, symbol){
 
     
-    //If-sats som förhindrar spelaren att öppna fler än 2 kort samtidigt
+    //If-sats som förhindrar spelaren att öppna fler än 2 kort samtidigt, eller ett kort som redan är hittat.
     if (!gameState.currentlyFlipped && !card.currentTarget.classList.contains("hide")){
         card = card.currentTarget;
-        card.classList.toggle('flip');
+        card.classList.add('flip'); //Lägger till styling-classen flip
         
 
         if (gameState.cardsFlipped == 0) {
@@ -122,8 +191,8 @@ function flipCard(card, symbol){
             console.log(firstCard);
             gameState.cardsFlipped += 1;
         
-        } else {
-            
+        } else if (card != firstCard) { // Kollar så att man inte tryckt på samma kort
+    
             secondCard = card;
             secondCardSymbol = symbol;
             console.log("Second card: " + secondCardSymbol);
