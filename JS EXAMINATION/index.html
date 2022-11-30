@@ -30,10 +30,12 @@
         <div class="page-wrapper">
             <div class="left-side">
                 <header><h1 class="player-turn-text">Spelare 1's tur</h1></header>
-                <div class="card-container">
-                    <h1 class="winner-text"><label class="player-name-label"></label><label class="result-label"> vann!</label></h1>
-                <!--Kort ligger här-->
-                </div>
+
+                    <div class="card-container">
+                        <h1 class="winner-text"><label class="player-name-label"></label><label class="result-label"> vann!</label></h1>
+                    <!--Kort ligger här-->
+                    </div>
+                
             </div>
             <div class="points-container">
                 <div>
@@ -41,9 +43,16 @@
                     <h3><label class="player-one-name-label"></label><label class="player-one-score">0</label></h3>
                     <h3><label class="player-two-name-label"></label><label class="player-two-score">0</label></h3>
                 </div>
+                <div class="history-container">
+                    <header>Historik</header>
+                    <hr></hr>
+                    <div class="history">
+                        <!-- skriv ut historiken här -->
+                    </div>
+                </div>
                 <div class="btn-container">
                     <button onclick="createCards();">Återställ poängen</button>
-                    <button>Avsluta matchen</button>
+                    <button onclick="exit();">Avsluta spel</button>
                 </div>
             </div>
         </div>

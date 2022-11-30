@@ -132,6 +132,7 @@ body {
     justify-content: space-between;
 
     height: 100vh;
+    width: 100vw;
 
     perspective: 1000px;
 
@@ -139,18 +140,16 @@ body {
 }
 
 .left-side {
-    height: 95vh;
+    height: 90vh;
     width: 65%;
 }
 
 header {
     text-align: center;
     line-height: 5vh;
-    height: 5vh;
+    height: 10vh;
 
     font-size: 3rem;
-
-    /*background-color: lightgray;*/
 }
 
 .card-container {
@@ -161,8 +160,6 @@ header {
     align-items: center;
     height: 100%;
     width: 100%;
-
-    /* background-color: lightgray; */
 }
 
 .winner-text {
@@ -199,25 +196,29 @@ header {
     border: none;
     border-radius: 8px;
 
+    background: linear-gradient(to bottom, rgb(23, 175, 91), rgb(2, 125, 57));
     color: white;
-    background-color: rgb(23, 175, 91);
+}
+.btn-container button:hover {
+    background: linear-gradient(to top, rgb(23, 175, 91), rgb(2, 125, 57));
+    cursor: pointer;
 }
 
 .points-container h1 {
     margin: 1rem 0 0 2rem;
 
-    font-size: 4rem;
+    font-size: 2.5rem;
 }
 
 .points-container h3 {
     margin: 1rem 0 0 3rem;
-    font-size: 3rem;
+    font-size: 1.5rem;
 }
 
 .card {
 
-    height: 12vh;
-    width: 12vh;
+    height: 18vh;
+    width: 18vh;
 
     color: whiteblack;
     background-color: #7209b7;
@@ -255,4 +256,32 @@ header {
 
 .flip {
     transform: rotateY(180deg);
+}
+
+
+
+.history-container {
+    margin: 0 auto;
+    width: 80%;
+    height: 40%;
+    margin-bottom: 1em;
+}
+
+.history-container header {
+    font-size: 1.5em;
+    margin-bottom: .5em;
+}
+
+.history-container hr {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.history {
+    margin: 0 auto;
+    margin-top: .5em;
+    width: 80%;
+    height: 75%;
+
+    font-size: 1.5rem;
 }

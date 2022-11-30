@@ -10,6 +10,7 @@ const secondPlayerName = document.querySelector(".second-player-name");
 const player1 = document.querySelector(".player1");
 const player2 = document.querySelector(".player2");
 
+
 //Declare variables
 
 const gameState = {
@@ -23,7 +24,9 @@ const gameState = {
     //player one name?
     //player two name?
     playerOneName: "Spelare 1",
-    playerTwoName: "Spelare 2"
+    playerTwoName: "Spelare 2",
+
+    history: ""
 }
 
 //Start button
@@ -83,6 +86,7 @@ const playerOneNameLabel = document.querySelector(".player-one-name-label");
 const playerTwoNameLabel = document.querySelector(".player-two-name-label");
 const winnerText = document.querySelector(".winner-text")
 const resultLabel = document.querySelector(".result-label");
+const historyContainer = document.querySelector('.history');
 
 let firstCard, secondCard, firstCardSymbol, secondCardSymbol;
 
@@ -109,6 +113,7 @@ function createCards() {
 
     //Börja med att ta bort befintliga kort och resetta alla poäng
     deleteAllCards();
+    gameState.history = "";
     symbols = randomizeSymbolArray(symbols);
     gameState.playerOneScore = 0;
     gameState.playerTwoScore = 0;
@@ -160,6 +165,31 @@ function updateGraphics() {
     playerTwoNameLabel.innerText = gameState.playerTwoName + ": ";
     playerOneScoreText.innerText = gameState.playerOneScore;
     playerTwoScoreText.innerText = gameState.playerTwoScore;
+    historyContainer.innerHTML = gameState.history;
+}
+
+function updateHistory(){
+    if (gameState.playerTurn == 0) {
+
+        gameState.history += "<p> " + gameState.playerOneName + " hittade " + firstCardSymbol + " </p>";
+        historyContainer.innerHTML = gameState.history;
+        
+
+    } else {
+        gameState.history += "<p> " + gameState.playerTwoName + " hittade " + firstCardSymbol + " </p>";
+        historyContainer.innerHTML = gameState.history;
+        
+    }
+    
+    console.log(history);
+}
+
+function exit(){
+    createCards();
+
+    startMenu.style.visibility = "visible";
+    gameDisplay.style.visibility = "hidden";
+    playerMenu.style.visibility = "hidden";
 }
 
 function checkIfCardsMatch(firstCard, secondCard) {
@@ -169,6 +199,7 @@ function checkIfCardsMatch(firstCard, secondCard) {
 
         addPoint()
         updateGraphics();
+        updateHistory();
         firstCard.classList.add("correct");
         secondCard.classList.add("correct");
         setTimeout(() => {
@@ -177,8 +208,6 @@ function checkIfCardsMatch(firstCard, secondCard) {
             checkIfGameEnded();
         }, 1000);
         
-        
-
 
     } else {
         console.log("Korten matchade inte");
@@ -275,5 +304,4 @@ function flipCard(card, symbol){
         }
     }
 }
-
 
